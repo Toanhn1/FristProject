@@ -1,10 +1,12 @@
 from pydal import DAL, Field
 
-dbConnect = DAL('mysql://root:root@localhost/studyCode')
+dbConnect = DAL('mysql://root:root@localhost/sampleConnect')
 
 try:
     #The syntax to create order table and insert data in it
-    dbConnect.define_table('order', Field('userId',required=True) ,
+    dbConnect.define_table('order',
+                           Field('orderId', required=True),
+                           Field('userId',required=True) ,
                            Field('ngaymua', type='date'),
                            Field('name', type='text'),
                            Field('event_name', type='text'),
@@ -14,7 +16,7 @@ try:
                            Field('cach_thanh_toan', type='text'),
                            Field('phuong_thuc_nhan', type='text'),
                            Field('quan_huyen', type='text'),
-                           primarykey=['userId']
+                           primarykey=['orderId']
                            )
 
     # The syntax to create order detail table and insert data in it
@@ -35,13 +37,13 @@ try:
     dbConnect.list_event.insert(event_name = 'Phao Hoa',dia_diem = 'Cau rong',thoi_gian = '2018/05/06')
     dbConnect.list_event.insert(event_name='Cau phun lua', dia_diem='Cau rong', thoi_gian='2018/05/07')
     dbConnect.list_event.insert(event_name='Duong pho', dia_diem='Hai Chau', thoi_gian='2018/05/06')
-    dbConnect.order.insert(userId = 'KH002' ,ngaymua = '2018/05/08',name = 'Nguyen Van B',event_name = 'Phao Hoa',
+    dbConnect.order.insert(orderId = 'HD002',userId = 'KH002' ,ngaymua = '2018/05/08',name = 'Nguyen Van B',event_name = 'Phao Hoa',
                            age = 26,phone = '01234569856', email = 'Bnv@gmail.com', cach_thanh_toan = 'Qua ATM' ,
                            phuong_thuc_nhan = "Truc Tiep" , quan_huyen = 'Hai Chau')
-    dbConnect.order.insert(userId='KH003', ngaymua='2018/03/08', name='Nguyen Van C',event_name = 'Phao Hoa', age=23,
+    dbConnect.order.insert(orderId = 'HD001',userId='KH003', ngaymua='2018/03/08', name='Nguyen Van C',event_name = 'Phao Hoa', age=23,
                            phone='01234569456', email='Cnv@gmail.com', cach_thanh_toan='Qua ATM',
                            phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu')
-    dbConnect.order.insert(userId='KH004', ngaymua='2018/02/08', name='Nguyen Van D', event_name = 'Phao Hoa', age=24,
+    dbConnect.order.insert(orderId = 'HD003',userId='KH004', ngaymua='2018/02/08', name='Nguyen Van D', event_name = 'Phao Hoa', age=24,
                            phone='09234569876', email='Dnv@gmail.com', cach_thanh_toan='Qua ATM',
                            phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu 2')
     dbConnect.order_detail.insert(eventId = "EV001",userId='KH001', name_event='Phao Hoa 30/4',
@@ -59,6 +61,8 @@ try:
 
     #This method to regist new member to join event
     def regist_member():
+        print("please input orderId:")
+        orderId = str(input())
         print("Plase input your ID:")
         userId = str(input())
         print("Plase input Ngay mua:")
@@ -79,7 +83,7 @@ try:
         phuong_thuc_nhan = str(input())
         print("Plase input Address :")
         quan_huyen = str(input())
-        dbConnect.order.insert(userId='%s'%userId, ngaymua='%s'%ngaymua, name='%s'%name, event_name ='%s'%event_name,
+        dbConnect.order.insert(orderId = '%s'%orderId,userId='%s'%userId, ngaymua='%s'%ngaymua, name='%s'%name, event_name ='%s'%event_name,
                                age='%r'%age,phone='%s'%phone, email='%s'%email, cach_thanh_toan='%s'%cach_thanh_toan,
                           phuong_thuc_nhan='%s'%phuong_thuc_nhan, quan_huyen='%s'%quan_huyen)
         print("Your regist is success!")
@@ -97,6 +101,13 @@ try:
         userId = str(input())
         for data in getListRegisted.find(lambda data: data.order.userId[0] == '%s'%userId):
             print(data.order.userId, data.order_detail.eventId)
+
+    #This method to delete the person have been registed
+    def delete_registedPerson():
+        print("input orderId of the person!")
+        orderId = str(input())
+        dbConnect(dbConnect.order.orderId == orderId).delete()
+        print("Success!")
 
     print("You Want to regist in event!input 1 >> ok 2 >> not ")
     check = int(input())
@@ -119,7 +130,7 @@ try:
             list_registedById()
         elif position == 4:
             print("--List the people have been registed by Id--")
-            list_registed()
+            delete_registedPerson()
         else :
             check = 5
 finally:
