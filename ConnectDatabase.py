@@ -32,24 +32,24 @@ try:
                            Field('dia_diem', type = 'text'),
                            Field('thoi_gian', type='date'),
                            )
-    # dbConnect.list_event.insert(event_name = 'Phao Hoa',dia_diem = 'Cau rong',thoi_gian = '2018/05/06')
-    # dbConnect.list_event.insert(event_name='Cau phun lua', dia_diem='Cau rong', thoi_gian='2018/05/07')
-    # dbConnect.list_event.insert(event_name='Duong pho', dia_diem='Hai Chau', thoi_gian='2018/05/06')
-    # dbConnect.order.insert(userId = 'KH002' ,ngaymua = '2018/05/08',name = 'Nguyen Van B',event_name = 'Phao Hoa',
-    #                        age = 26,phone = '01234569856', email = 'Bnv@gmail.com', cach_thanh_toan = 'Qua ATM' ,
-    #                        phuong_thuc_nhan = "Truc Tiep" , quan_huyen = 'Hai Chau')
-    # dbConnect.order.insert(userId='KH003', ngaymua='2018/03/08', name='Nguyen Van C',event_name = 'Phao Hoa', age=23,
-    #                        phone='01234569456', email='Cnv@gmail.com', cach_thanh_toan='Qua ATM',
-    #                        phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu')
-    # dbConnect.order.insert(userId='KH004', ngaymua='2018/02/08', name='Nguyen Van D', event_name = 'Phao Hoa', age=24,
-    #                        phone='09234569876', email='Dnv@gmail.com', cach_thanh_toan='Qua ATM',
-    #                        phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu 2')
-    # dbConnect.order_detail.insert(eventId = "EV001",userId='KH001', name_event='Phao Hoa 30/4',
-    #                               diadiem_tochuc='Nha Van Hoa Lien Chieu'
-    #                               , thoigian_tochuc='2018/06/07 13:23', quan_huyen_tochuc='Lien Chieu')
-    # dbConnect.order_detail.insert(eventId="EV001", userId='KH002', name_event='Phao Hoa 30/4',
-    #                               diadiem_tochuc='Nha Van Hoa Lien Chieu'
-    #                               , thoigian_tochuc='2018/06/07 13:23', quan_huyen_tochuc='Lien Chieu')
+    dbConnect.list_event.insert(event_name = 'Phao Hoa',dia_diem = 'Cau rong',thoi_gian = '2018/05/06')
+    dbConnect.list_event.insert(event_name='Cau phun lua', dia_diem='Cau rong', thoi_gian='2018/05/07')
+    dbConnect.list_event.insert(event_name='Duong pho', dia_diem='Hai Chau', thoi_gian='2018/05/06')
+    dbConnect.order.insert(userId = 'KH002' ,ngaymua = '2018/05/08',name = 'Nguyen Van B',event_name = 'Phao Hoa',
+                           age = 26,phone = '01234569856', email = 'Bnv@gmail.com', cach_thanh_toan = 'Qua ATM' ,
+                           phuong_thuc_nhan = "Truc Tiep" , quan_huyen = 'Hai Chau')
+    dbConnect.order.insert(userId='KH003', ngaymua='2018/03/08', name='Nguyen Van C',event_name = 'Phao Hoa', age=23,
+                           phone='01234569456', email='Cnv@gmail.com', cach_thanh_toan='Qua ATM',
+                           phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu')
+    dbConnect.order.insert(userId='KH004', ngaymua='2018/02/08', name='Nguyen Van D', event_name = 'Phao Hoa', age=24,
+                           phone='09234569876', email='Dnv@gmail.com', cach_thanh_toan='Qua ATM',
+                           phuong_thuc_nhan="Truc Tiep", quan_huyen='Lien Chieu 2')
+    dbConnect.order_detail.insert(eventId = "EV001",userId='KH001', name_event='Phao Hoa 30/4',
+                                  diadiem_tochuc='Nha Van Hoa Lien Chieu'
+                                  , thoigian_tochuc='2018/06/07 13:23', quan_huyen_tochuc='Lien Chieu')
+    dbConnect.order_detail.insert(eventId="EV001", userId='KH002', name_event='Phao Hoa 30/4',
+                                  diadiem_tochuc='Nha Van Hoa Lien Chieu'
+                                  , thoigian_tochuc='2018/06/07 13:23', quan_huyen_tochuc='Lien Chieu')
 
     #This method to get all event is da nang city
     def list_festival():
@@ -121,7 +121,7 @@ try:
             print("--List the people have been registed by Id--")
             list_registed()
         else :
-            check = 3
+            check = 5
 finally:
     if dbConnect:
         dbConnect.close()
